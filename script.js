@@ -55,9 +55,11 @@ const displayAllPost = (posts) => {
                         </div>
                         <div>
                             <div glass="opacity-100">
-        <button id="addToList" onclick="markAsRead()" data-post='${JSON.stringify(
-          e
-        )}' class="addToList btn btn-circle bg-green-500 btn-sm">  <i class="fa-solid fa-envelope-open text-white"></i> </button>
+        <button id="addToList" onclick="markAsRead('${e.description}, ${
+      e.view_count
+    }')" data-post='${JSON.stringify(
+      e
+    )}' class="addToList btn btn-circle bg-green-500 btn-sm">  <i class="fa-solid fa-envelope-open text-white"></i> </button>
 </div>
                         </div>
                    
@@ -67,7 +69,7 @@ const displayAllPost = (posts) => {
             </div>
   
         `;
-        postContainer.appendChild(div)
+    postContainer.appendChild(div);
   });
 };
 
@@ -76,4 +78,23 @@ loadAllData();
 const handleSearchByCategory = () => {
   const searchField = document.getElementById("searchPosts").value;
   loadAllData(searchField);
+};
+
+const markAsRead = (description, view_count) => {
+  const markAsReadContainer = document.getElementById("markAsReadContainer");
+  const div = document.createElement("div");
+  div.innerHTML = `
+
+ <!-- dynamic content -->
+         <div class="flex from-black p-2 lg:p-3 bg-white rounded-2xl items-center gap-3">
+          <div class="lg:w-4/5 w-11/12">
+            <p>postData.description</p>
+          </div>
+          <div class="lg:w-1/5 w-4/12 flex justify-end">
+            <p><i class="fa-regular fa-eye">postData.view_count</i></p>
+          </div>
+         </div>
+
+ `;
+ markAsReadContainer.appendChild(div)
 };
